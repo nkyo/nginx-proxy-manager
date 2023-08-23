@@ -29,7 +29,7 @@ RUN echo "fs.file-max = 65535" > /etc/sysctl.conf \
 	&& rm -rf /var/lib/apt/lists/*
 
 # s6 overlay
-COPY ../docker/scripts/install-s6 /tmp/install-s6
+COPY scripts/install-s6 /tmp/install-s6
 RUN /tmp/install-s6 "${TARGETPLATFORM}" && rm -f /tmp/install-s6
 
 EXPOSE 80 81 443
@@ -43,7 +43,7 @@ RUN yarn install \
 	&& yarn cache clean
 
 # add late to limit cache-busting by modifications
-COPY ../docker/rootfs /
+COPY rootfs /
 
 # Remove frontend service not required for prod, dev nginx config as well
 RUN rm -rf /etc/s6-overlay/s6-rc.d/user/contents.d/frontend /etc/nginx/conf.d/dev.conf \
