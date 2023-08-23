@@ -35,7 +35,7 @@ RUN /tmp/install-s6 "${TARGETPLATFORM}" && rm -f /tmp/install-s6
 EXPOSE 80 81 443
 
 COPY backend       /app
-COPY frontend/dist /app/frontend
+COPY frontend /app/frontend
 COPY global        /app/global
 
 WORKDIR /app
